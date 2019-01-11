@@ -4,6 +4,9 @@
   "main": "dist/hooks.cjs.js",
   "module": "dist/hooks.esm.js",
   "types": "dist/types/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prepare": "npm run build",
     "test": "jest --watch",
