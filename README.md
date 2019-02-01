@@ -57,3 +57,35 @@ export const NeedsAParam = () => {
   )
 }
 ```
+
+### useDebounce
+
+Debounce the updating of a value
+
+```js
+useDebounce<ValueType>(value: ValueType, duration: number): ValueType
+```
+
+#### Example
+
+```js
+import React from 'react'
+import { useDebounce } from '@iteam/hooks'
+
+export const Debounced = () => {
+  const [inputValue, setInputValue] = React.useState('')
+  const debouncedValue = useDebounce(inputValue, 300)
+
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setInputValue(e.currentTarget.value)
+  }
+
+  return (
+    <div>
+      <label htmlFor="test-input">Best field ever</label>
+      <input id="test-input" onChange={handleChange} value={debouncedValue} />
+      {debouncedValue}
+    </div>
+  )
+}
+```
