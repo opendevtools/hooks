@@ -1,9 +1,8 @@
-import 'jest-dom/extend-expect'
 import * as React from 'react'
-import { render, cleanup } from 'react-testing-library'
+import { render } from 'react-testing-library'
 import { useQueryParam } from '../useQueryParam'
 
-afterEach(cleanup)
+declare var jsdom: any
 
 function NeedsParams({ param }: { param: string }) {
   const queryParam = useQueryParam(param)

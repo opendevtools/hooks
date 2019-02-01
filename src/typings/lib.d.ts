@@ -1,1 +1,1 @@
-declare var jsdom: any
+import 'jest-dom/extend-expect'

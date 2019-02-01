@@ -7,4 +7,8 @@ module.exports = {
       diagnostics: false,
     },
   },
+  setupFilesAfterEnv: [
+    'jest-dom/extend-expect',
+    'react-testing-library/cleanup-after-each',
+  ],
 }

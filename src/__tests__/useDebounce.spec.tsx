@@ -1,9 +1,6 @@
-import 'jest-dom/extend-expect'
 import * as React from 'react'
-import { cleanup, fireEvent, render } from 'react-testing-library'
+import { fireEvent, render } from 'react-testing-library'
 import { useDebounce } from '../useDebounce'
-
-afterEach(cleanup)
 
 function Debounced() {
   const [inputValue, setInputValue] = React.useState('')
