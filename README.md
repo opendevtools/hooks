@@ -76,7 +76,7 @@ export const Debounced = () => {
   const [inputValue, setInputValue] = React.useState('')
   const debouncedValue = useDebounce(inputValue, 300)
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     setInputValue(e.currentTarget.value)
   }
 
