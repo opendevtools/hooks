@@ -1,48 +1,37 @@
-import * as React from 'react'
-import { render } from 'react-testing-library'
+import { testHook } from 'react-testing-library'
 import { useQueryParam } from '../useQueryParam'
 
 declare var jsdom: any
 
-function NeedsParams({ param }: { param: string }) {
-  const queryParam = useQueryParam(param)
-
-  return (
-    <div>
-      {typeof queryParam === 'string' ? queryParam : queryParam.join(',')}
-    </div>
-  )
-}
-
 test('gets query param from window location search', () => {
+  let param
   jsdom.reconfigure({ url: 'http://test.com/?muppet=cookiemonster' })
 
-  const { getByText } = render(<NeedsParams param="muppet" />)
+  testHook(() => (param = useQueryParam('muppet')))
 
-  expect(getByText(/cookiemonster/i)).toBeInTheDocument()
+  expect(param).toEqual('cookiemonster')
 })
 
 test('handles query params with string array', () => {
+  let param
+
   jsdom.reconfigure({
     url: 'http://test.com/?muppets=kermit&muppets=cookiemonster',
   })
 
-  const { getByText } = render(<NeedsParams param="muppets" />)
+  testHook(() => (param = useQueryParam('muppets')))
 
-  expect(getByText(/cookiemonster/i)).toBeInTheDocument()
-  expect(getByText(/kermit/i)).toBeInTheDocument()
+  expect(param).toEqual(['kermit', 'cookiemonster'])
 })
 
 test('handles no query params', () => {
+  let param
+
   jsdom.reconfigure({
     url: 'http://test.com',
   })
 
-  const { container } = render(<NeedsParams param="muppet" />)
+  testHook(() => (param = useQueryParam('muppet')))
 
-  expect(container).toMatchInlineSnapshot(`
-<div>
-  <div />
-</div>
-`)
+  expect(param).toEqual('')
 })

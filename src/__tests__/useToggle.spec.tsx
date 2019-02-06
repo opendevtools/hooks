@@ -1,24 +1,17 @@
-import * as React from 'react'
-import { fireEvent, render } from 'react-testing-library'
+import { act, testHook } from 'react-testing-library'
 import { useToggle } from '../useToggle'
 
-function Toggle({ initialValue }: { initialValue: boolean }) {
-  const [isToggled, toggleValue] = useToggle(initialValue)
-
-  return (
-    <div>
-      {isToggled ? 'true' : 'false'}
-      <button onClick={toggleValue}>Toggle</button>
-    </div>
-  )
-}
-
 test('toggles the state', () => {
-  const { getByText } = render(<Toggle initialValue={false} />)
+  let isToggled
+  let toggleValue: () => void
 
-  expect(getByText(/false/i)).toBeInTheDocument()
+  testHook(() => ([isToggled, toggleValue] = useToggle(false)))
 
-  fireEvent.click(getByText(/toggle/i))
+  expect(isToggled).toBe(false)
 
-  expect(getByText(/true/i)).toBeInTheDocument()
+  act(() => {
+    toggleValue()
+  })
+
+  expect(isToggled).toBe(true)
 })

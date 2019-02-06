@@ -1,48 +1,40 @@
-import * as React from 'react'
+import { act, testHook } from 'react-testing-library'
 import { useLocalStorage } from '../useLocalStorage'
-import { render, fireEvent } from 'react-testing-library'
 
-function Storage({ initialValue }: { initialValue?: string }) {
-  const [value, setValue] = useLocalStorage('storedValue', initialValue)
-
-  return (
-    <div>
-      {value ? value : 'no value ;('}
-      <label htmlFor="store">Update store value</label>
-      <input
-        id="store"
-        onChange={e => setValue(e.currentTarget.value)}
-        type="text"
-        value={value}
-      />
-    </div>
-  )
-}
+afterEach(() => {
+  localStorage.clear()
+})
 
 test('handles localstorage values', () => {
-  const { getByText, getByLabelText } = render(<Storage />)
+  let value
+  let setValue: (value: string) => void
 
-  expect(getByText(/no value/i)).toBeInTheDocument()
+  testHook(() => ([value, setValue] = useLocalStorage('storedValue')))
 
-  fireEvent.change(getByLabelText(/update store value/i), {
-    target: { value: 'awesome value' },
+  expect(value).toEqual('')
+
+  act(() => {
+    setValue('awesome value')
   })
 
-  expect(getByText(/awesome value/i)).toBeInTheDocument()
+  expect(value).toEqual('awesome value')
 })
 
 test('handles initial value', () => {
-  const { getByText } = render(<Storage initialValue="test" />)
+  let value
 
-  expect(getByText(/test/i)).toBeInTheDocument()
+  testHook(() => ([value] = useLocalStorage('storedValue', 'test')))
+
+  expect(value).toEqual('test')
 })
 
 test('handles error when setting up value', () => {
-  global.JSON.stringify = jest.fn().mockImplementation(() => {
+  let value
+  ;(localStorage.getItem as jest.Mock).mockImplementationOnce(() => {
     throw new Error('b0rk')
   })
 
-  const { getByText } = render(<Storage initialValue="test" />)
+  testHook(() => ([value] = useLocalStorage('storedValue')))
 
-  expect(getByText(/no value/i)).toBeInTheDocument()
+  expect(value).toEqual('')
 })

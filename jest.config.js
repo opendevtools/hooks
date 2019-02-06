@@ -7,6 +7,7 @@ module.exports = {
       diagnostics: false,
     },
   },
+  setupFiles: ['jest-localstorage-mock'],
   setupFilesAfterEnv: [
     'jest-dom/extend-expect',
     'react-testing-library/cleanup-after-each',

@@ -7,7 +7,7 @@ export const useLocalStorage = (
   const [value, setValue] = useState(() => {
     try {
       if (initialValue) {
-        return JSON.stringify(initialValue)
+        return initialValue
       } else {
         return localStorage.getItem(key) || ''
       }
