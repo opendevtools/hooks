@@ -12,6 +12,7 @@
     "test": "is-ci \"test:ci\" \"test:watch\"",
     "test:watch": "jest --watch",
     "test:ci": "jest",
+    "coverage": "jest --coverage",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "npm run typecheck -- --watch",
     "build:types": "tsc --emitDeclarationOnly",
