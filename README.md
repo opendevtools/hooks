@@ -89,3 +89,35 @@ export const Debounced = () => {
   )
 }
 ```
+
+### useLocalStorage
+
+Get and set values in `localStorage`
+
+```js
+useLocalStorage(key: string, initialValue?: any): [string, (newValue: string) => void]
+```
+
+#### Example
+
+```js
+import React from 'react'
+import { useLocalStorage } from '@iteam/hooks'
+
+export const Storage = ({ initialValue }) => {
+  const [value, setValue] = useLocalStorage('storedValue', initialValue)
+
+  return (
+    <div>
+      {value ? value : 'no value ;('}
+      <label htmlFor="store">Update store value</label>
+      <input
+        id="store"
+        onChange={e => setValue(e.currentTarget.value)}
+        type="text"
+        value={value}
+      />
+    </div>
+  )
+}
+```
