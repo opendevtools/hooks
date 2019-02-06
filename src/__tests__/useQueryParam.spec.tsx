@@ -32,3 +32,17 @@ test('handles query params with string array', () => {
   expect(getByText(/cookiemonster/i)).toBeInTheDocument()
   expect(getByText(/kermit/i)).toBeInTheDocument()
 })
+
+test('handles no query params', () => {
+  jsdom.reconfigure({
+    url: 'http://test.com',
+  })
+
+  const { container } = render(<NeedsParams param="muppet" />)
+
+  expect(container).toMatchInlineSnapshot(`
+<div>
+  <div />
+</div>
+`)
+})
