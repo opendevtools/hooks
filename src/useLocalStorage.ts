@@ -20,7 +20,7 @@ export const useLocalStorage = (
 
   useEffect(() => {
     try {
-      localStorage.setItem(key, JSON.stringify(value))
+      localStorage.setItem(key, value)
     } catch {
       // Try/catch because the user might be in private mode
       // JSON.stringify might also throw
