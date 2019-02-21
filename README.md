@@ -131,7 +131,7 @@ Get and set values in any store with a `getItem` or `setItem`. Defaults to
 `localStorage`. Useful if you want to add something to for example `sessionStorage`.
 
 ```js
-useStorage(key: string, { initialValue?: any, store?: Storage }): [string, (newValue: string) => void]
+useStorage(key: string, options?: { initialValue?: any, store?: Storage }): [string, (newValue: string) => void]
 ```
 
 #### Example
