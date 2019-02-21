@@ -95,7 +95,7 @@ export const Debounced = () => {
 
 ### useLocalStorage
 
-Get and set values in `localStorage`
+Get and set values in `localStorage`. Uses `useStorage` under the hood.
 
 ```js
 useLocalStorage(key: string, initialValue?: any): [string, (newValue: string) => void]
@@ -109,6 +109,42 @@ import { useLocalStorage } from '@iteam/hooks'
 
 export const Storage = ({ initialValue }) => {
   const [value, setValue] = useLocalStorage('storedValue', initialValue)
+
+  return (
+    <div>
+      {value ? value : 'no value ;('}
+      <label htmlFor="store">Update store value</label>
+      <input
+        id="store"
+        onChange={e => setValue(e.currentTarget.value)}
+        type="text"
+        value={value}
+      />
+    </div>
+  )
+}
+```
+
+### useStorage
+
+Get and set values in any store with a `getItem` or `setItem`. Defaults to
+`localStorage`. Useful if you want to add something to for example `sessionStorage`.
+
+```js
+useStorage(key: string, { initialValue?: any, store?: Storage }): [string, (newValue: string) => void]
+```
+
+#### Example
+
+```js
+import React from 'react'
+import { useStorage } from '@iteam/hooks'
+
+export const Storage = ({ initialValue }) => {
+  const [value, setValue] = useStorage('storedValue', {
+    initialValue,
+    store: sessionStorage,
+  })
 
   return (
     <div>
