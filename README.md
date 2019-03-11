@@ -11,9 +11,17 @@ This is a collection of hooks that we can reuse for any project that needs them.
 npm install @iteam/hooks
 ```
 
-## Features
+## Available Hooks
 
-### useToggle
+- [useToggle](#useToggle)
+- [useQueryParam](#useQueryParam)
+- [useDebounce](#useDebounce)
+- [useLocalStorage](#useLocalStorage)
+- [useStorage](#useStorage)
+
+----
+
+### [useToggle](#useToggle)
 
 Uses `useState` but returns a setter function that toggles the value.
 
@@ -34,7 +42,7 @@ export const ToggleComponent = () => {
 }
 ```
 
-### useQueryParam
+### [useQueryParam](#useQueryParam)
 
 Gets a value from a specified query param
 
@@ -61,7 +69,7 @@ export const NeedsAParam = () => {
 }
 ```
 
-### useDebounce
+### [useDebounce](#useDebounce)
 
 Debounce the updating of a value
 
@@ -93,7 +101,7 @@ export const Debounced = () => {
 }
 ```
 
-### useLocalStorage
+### [useLocalStorage](#useLocalStorage)
 
 Get and set values in `localStorage`. Uses `useStorage` under the hood.
 
@@ -125,7 +133,7 @@ export const Storage = ({ initialValue }) => {
 }
 ```
 
-### useStorage
+### [useStorage](#useStorage)
 
 Get and set values in any store with a `getItem` or `setItem`. Defaults to
 `localStorage`. Useful if you want to add something to for example `sessionStorage`.
