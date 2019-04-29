@@ -14,12 +14,13 @@ npm install @iteam/hooks
 ## Available Hooks
 
 - [useToggle](#useToggle)
+- [useQueryParams](#useQueryParams)
 - [useQueryParam](#useQueryParam)
 - [useDebounce](#useDebounce)
 - [useLocalStorage](#useLocalStorage)
 - [useStorage](#useStorage)
 
-----
+---
 
 ### [useToggle](#useToggle)
 
@@ -42,9 +43,36 @@ export const ToggleComponent = () => {
 }
 ```
 
+### [useQueryParams](#useQueryParams)
+
+Gets all the query param values
+
+```js
+useQueryParams(): { [key: string]: string | string[] | undefined }
+```
+
+#### Example
+
+```js
+// https://awesome.domain/?name=cookie&lastName=monster
+
+import React from 'react'
+import { useQueryParams } from '@iteam/hooks'
+
+export const NeedsABunchOfParams = () => {
+  const params = useQueryParams()
+
+  console.log(params)
+  // { name: 'cookie', lastName: 'monster' }
+
+  return null
+}
+```
+
 ### [useQueryParam](#useQueryParam)
 
-Gets a value from a specified query param
+Gets a value from a specified query param, useful if you only require one value
+out of a bunch. Uses `useQueryParams` under the hood.
 
 ```js
 useQueryParam(param: string): string | string[]

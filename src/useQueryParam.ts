@@ -1,11 +1,7 @@
-import { useState } from 'react'
-import queryString from 'query-string'
+import { useQueryParams } from './useQueryParams'
 
 export const useQueryParam = (param: string) => {
-  const [queryParam] = useState(() => {
-    const params = queryString.parse(window.location.search)
-    return params[param] || ''
-  })
+  const queryParams = useQueryParams()
 
-  return queryParam
+  return queryParams[param] || ''
 }
