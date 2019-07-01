@@ -1,20 +1,19 @@
 import { useState } from 'react'
-import { act, testHook } from 'react-testing-library'
+import { act, renderHook } from '@testing-library/react-hooks'
 import { useDebounce } from '../useDebounce'
 
 test('sets a input value after a delay', () => {
-  let value
+  let value: string
   let updateValue: (value: string) => void
-  let debouncedValue
 
   jest.useFakeTimers()
 
-  testHook(() => {
+  const { result } = renderHook(() => {
     ;[value, updateValue] = useState('')
-    debouncedValue = useDebounce(value, 300)
+    return useDebounce(value, 300)
   })
 
-  expect(debouncedValue).toEqual('')
+  expect(result.current).toEqual('')
 
   act(() => {
     updateValue('test')
@@ -24,5 +23,5 @@ test('sets a input value after a delay', () => {
     jest.runAllTimers()
   })
 
-  expect(debouncedValue).toEqual('test')
+  expect(result.current).toEqual('test')
 })

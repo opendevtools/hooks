@@ -1,17 +1,14 @@
-import { act, testHook } from 'react-testing-library'
+import { act, renderHook } from '@testing-library/react-hooks'
 import { useToggle } from '../useToggle'
 
 test('toggles the state', () => {
-  let isToggled
-  let toggleValue: () => void
+  const { result } = renderHook(() => useToggle(false))
 
-  testHook(() => ([isToggled, toggleValue] = useToggle(false)))
-
-  expect(isToggled).toBe(false)
+  expect(result.current[0]).toBe(false)
 
   act(() => {
-    toggleValue()
+    result.current[1]()
   })
 
-  expect(isToggled).toBe(true)
+  expect(result.current[0]).toBe(true)
 })

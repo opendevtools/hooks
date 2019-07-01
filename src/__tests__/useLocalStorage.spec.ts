@@ -1,4 +1,4 @@
-import { act, testHook } from 'react-testing-library'
+import { act, renderHook } from '@testing-library/react-hooks'
 import { useLocalStorage } from '../useLocalStorage'
 
 afterEach(() => {
@@ -6,35 +6,29 @@ afterEach(() => {
 })
 
 test('handles localstorage values', () => {
-  let value
-  let setValue: (value: string) => void
+  const { result } = renderHook(() => useLocalStorage('storedValue'))
 
-  testHook(() => ([value, setValue] = useLocalStorage('storedValue')))
-
-  expect(value).toEqual('')
+  expect(result.current[0]).toEqual('')
 
   act(() => {
-    setValue('awesome value')
+    result.current[1]('awesome value')
   })
 
-  expect(value).toEqual('awesome value')
+  expect(result.current[0]).toEqual('awesome value')
 })
 
 test('handles initial value', () => {
-  let value
+  const { result } = renderHook(() => useLocalStorage('storedValue', 'test'))
 
-  testHook(() => ([value] = useLocalStorage('storedValue', 'test')))
-
-  expect(value).toEqual('test')
+  expect(result.current[0]).toEqual('test')
 })
 
 test('handles error when setting up value', () => {
-  let value
   ;(localStorage.getItem as jest.Mock).mockImplementationOnce(() => {
     throw new Error('b0rk')
   })
 
-  testHook(() => ([value] = useLocalStorage('storedValue')))
+  const { result } = renderHook(() => useLocalStorage('storedValue'))
 
-  expect(value).toEqual('')
+  expect(result.current[0]).toEqual('')
 })

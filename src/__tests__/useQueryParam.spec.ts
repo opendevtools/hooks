@@ -1,37 +1,32 @@
-import { testHook } from 'react-testing-library'
+import { renderHook } from '@testing-library/react-hooks'
 import { useQueryParam } from '../useQueryParam'
 
 declare var jsdom: any
 
 test('gets query param from window location search', () => {
-  let param
   jsdom.reconfigure({ url: 'http://test.com/?muppet=cookiemonster' })
 
-  testHook(() => (param = useQueryParam('muppet')))
+  const { result } = renderHook(() => useQueryParam('muppet'))
 
-  expect(param).toEqual('cookiemonster')
+  expect(result.current).toEqual('cookiemonster')
 })
 
 test('handles query params with string array', () => {
-  let param
-
   jsdom.reconfigure({
     url: 'http://test.com/?muppets=kermit&muppets=cookiemonster',
   })
 
-  testHook(() => (param = useQueryParam('muppets')))
+  const { result } = renderHook(() => useQueryParam('muppets'))
 
-  expect(param).toEqual(['kermit', 'cookiemonster'])
+  expect(result.current).toEqual(['kermit', 'cookiemonster'])
 })
 
 test('handles no query params', () => {
-  let param
-
   jsdom.reconfigure({
     url: 'http://test.com',
   })
 
-  testHook(() => (param = useQueryParam('muppet')))
+  const { result } = renderHook(() => useQueryParam('muppet'))
 
-  expect(param).toEqual('')
+  expect(result.current).toEqual('')
 })
