@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import queryString from 'query-string'
 
 export const useQueryParams = (): {
@@ -9,5 +9,5 @@ export const useQueryParams = (): {
     return params || {}
   })
 
-  return queryParams
+  return useMemo(() => queryParams, [queryParams])
 }
