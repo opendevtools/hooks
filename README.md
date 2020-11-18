@@ -1,14 +1,11 @@
-# Iteam Hooks
-
-[![](https://github.com/Iteam1337/hooks/workflows/Release/badge.svg)](https://github.com/Iteam1337/hooks/actions?workflow=Release)
-[![npm version](https://badge.fury.io/js/%40iteam%2Fhooks.svg)](https://badge.fury.io/js/%40iteam%2Fhooks)
+# Hooks
 
 This is a collection of hooks that we can reuse for any project that needs them. It's also a source of use cases of [React Hooks](https://reactjs.org/docs/hooks-reference.html) and how to test them using [react-testing-library](https://github.com/kentcdodds/react-testing-library/).
 
 ## Installation
 
 ```bash
-npm install @iteam/hooks
+npm install @opendevtools/hooks
 ```
 
 ## Available Hooks
@@ -34,7 +31,7 @@ useToggle(initialValue: boolean): [boolean, () => void]
 
 ```js
 import React from 'react'
-import { useToggle } from '@iteam/hooks'
+import { useToggle } from '@opendevtools/hooks'
 
 export const ToggleComponent = () => {
   const [isAlive, toggleValue] = useToggle(false)
@@ -57,7 +54,7 @@ useQueryParams(): { [key: string]: string | string[] | undefined }
 // https://awesome.domain/?name=cookie&lastName=monster
 
 import React from 'react'
-import { useQueryParams } from '@iteam/hooks'
+import { useQueryParams } from '@opendevtools/hooks'
 
 export const NeedsABunchOfParams = () => {
   const params = useQueryParams()
@@ -82,7 +79,7 @@ useQueryParam(param: string): string | string[]
 
 ```js
 import React from 'react'
-import { useQueryParam } from '@iteam/hooks'
+import { useQueryParam } from '@opendevtools/hooks'
 
 export const NeedsAParam = () => {
   const param = useQueryParam('sweetParam')
@@ -109,13 +106,13 @@ useDebounce<ValueType>(value: ValueType, duration: number): ValueType
 
 ```js
 import React from 'react'
-import { useDebounce } from '@iteam/hooks'
+import { useDebounce } from '@opendevtools/hooks'
 
 export const Debounced = () => {
   const [inputValue, setInputValue] = React.useState('')
   const debouncedValue = useDebounce(inputValue, 300)
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setInputValue(e.currentTarget.value)
   }
 
@@ -141,7 +138,7 @@ useLocalStorage(key: string, initialValue?: any): [string, (newValue: string) =>
 
 ```js
 import React from 'react'
-import { useLocalStorage } from '@iteam/hooks'
+import { useLocalStorage } from '@opendevtools/hooks'
 
 export const Storage = ({ initialValue }) => {
   const [value, setValue] = useLocalStorage('storedValue', initialValue)
@@ -152,7 +149,7 @@ export const Storage = ({ initialValue }) => {
       <label htmlFor="store">Update store value</label>
       <input
         id="store"
-        onChange={e => setValue(e.currentTarget.value)}
+        onChange={(e) => setValue(e.currentTarget.value)}
         type="text"
         value={value}
       />
@@ -174,7 +171,7 @@ useStorage(key: string, options?: { initialValue?: any, store?: Storage }): [str
 
 ```js
 import React from 'react'
-import { useStorage } from '@iteam/hooks'
+import { useStorage } from '@opendevtools/hooks'
 
 export const Storage = ({ initialValue }) => {
   const [value, setValue] = useStorage('storedValue', {
@@ -188,7 +185,7 @@ export const Storage = ({ initialValue }) => {
       <label htmlFor="store">Update store value</label>
       <input
         id="store"
-        onChange={e => setValue(e.currentTarget.value)}
+        onChange={(e) => setValue(e.currentTarget.value)}
         type="text"
         value={value}
       />
