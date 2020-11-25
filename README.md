@@ -1,6 +1,6 @@
 # Hooks
 
-This is a collection of hooks that we can reuse for any project that needs them. It's also a source of use cases of [React Hooks](https://reactjs.org/docs/hooks-reference.html) and how to test them using [react-testing-library](https://github.com/kentcdodds/react-testing-library/).
+This is a collection of hooks that we can reuse for any project that needs them. It's also a source of use cases of [React Hooks](https://reactjs.org/docs/hooks-reference.html) and how to test them using [react-testing-library](https://github.com/kentcdodds/react-testing-library/). This project was initially developed [@iteam1337](https://github.com/Iteam1337).
 
 ## Installation
 
