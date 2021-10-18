@@ -38,7 +38,7 @@
     "eslint": "7.27.0",
     "husky": "^6.0.0",
     "is-ci-cli": "^2.1.2",
-    "jest": "27.0.3",
+    "jest": "27.3.0",
     "jest-environment-jsdom": "27.0.3",
     "jest-environment-jsdom-global": "^2.0.4",
     "jest-localstorage-mock": "2.4.14",
